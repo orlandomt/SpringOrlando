@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="persona" class="com.tecsup.springorlando.model.Persona">
+	    <property name="nombre" value="Orlando"></property>
+	</bean>
+	
+	<!-- Manipulacion de Beans -->
+	<bean id="musico" class="com.tecsup.springorlando.model.Musico">
+	    <constructor-arg value="5"></constructor-arg>
+	</bean>
+	
+	<!-- Inyeccion con Referencia -->
+	<bean id="instrumento" class="com.tecsup.springorlando.model.Instrumento">
+	    <property name="marca" value="fender"></property>
+	</bean>
+	
+	<bean id="guitarra" class="com.tecsup.springorlando.model.Guitarra">
+	    <property name="marca" value="marcaGuitarra"></property>
+	</bean>
+	
+	<bean id="piano" class="com.tecsup.springorlando.model.Piano">
+		<property name="marca" value="marcaPiano"></property>    
+	</bean>
+	
+	<bean id="bajo" class="com.tecsup.springorlando.model.Instrumento" primary="true">
+		<property name="marca" value="Yamaha"></property>    
+	</bean>
+	
+	<bean id="musico1" class="com.tecsup.springorlando.model.Musico">
+	    <constructor-arg value="5"></constructor-arg>
+	    <constructor-arg ref="instrumento"></constructor-arg>
+	</bean>
+	
+	<!-- Valores a traves de setters -->
+	<bean id="musico2" class="com.tecsup.springorlando.model.Musico">
+	    <property name="nombre" value="John Lennon"></property>
+	    <property name="numeroCanciones" value="4"></property>
+	    
+	    <property name="instrumento" ref="instrumento"></property>
+	</bean>
+	
+	<!-- Bean Interno -->
+	<bean id="musico3" class="com.tecsup.springorlando.model.Musico">
+	    <property name="nombre" value="James Morrison"></property>
+	    <property name="numeroCanciones" value="4"></property>
+	    
+	    <property name="instrumento">
+	        <bean class="com.tecsup.springorlando.model.Guitarra">
+	            <property name="marca" value="Gibson"></property>
+	        </bean>
+	    </property>
+	</bean>
+	
+	<!-- Inyeccion de Colecciones -->
+	<bean id="musico4" class="com.tecsup.springorlando.model.Musico">
+	    <property name="instrumentos">
+	        <list>
+	            <ref bean="guitarra" />
+	            <ref bean="piano" />
+	        </list>
+	    </property>
+	</bean>
+	
+	<!-- Autowire by name -->
+	<bean id="musico5" class="com.tecsup.springorlando.model.Musico" autowire="byName" />
+	<bean id="musico6" class="com.tecsup.springorlando.model.Musico" autowire="byType" />
+	<bean id="musico7" class="com.tecsup.springorlando.model.Musico" autowire="constructor" />
+	<bean id="musico8" class="com.tecsup.springorlando.model.Musico" autowire="default" />
+	
+</beans>
